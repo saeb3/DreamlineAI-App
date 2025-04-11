@@ -15,7 +15,7 @@ const EmailConfirmation = () => {
 
   const handleNext = (e: any) => {
     console.log("Code entered:", code);
-    router.push(`/signup/choice?verificationCode=${code}`);
+    router.push(`/signup/choice`);
   };
 
   return (
