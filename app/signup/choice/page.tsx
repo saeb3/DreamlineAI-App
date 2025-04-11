@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 import Image from "next/image";
 
 const DreamlineOnboarding = () => {
   const [selectedOption, setSelectedOption] = useState(null);
+  const router = useRouter();
 
   const handleOptionClick = (option: any) => {
     setSelectedOption(option);
@@ -22,7 +24,7 @@ const DreamlineOnboarding = () => {
       </header>
 
       <div className="flex items-center p-4">
-        <span className="text-xl mr-4">
+        <span className="text-xl mr-4 hover:cursor-pointer" onClick={() => router.back()}>
           <Image
             src="/images/signup/back_arrow.png"
             alt="Signup Page Logo"
@@ -164,7 +166,7 @@ const DreamlineOnboarding = () => {
       <div className="p-4 mt-auto">
         <button
           type="submit"
-          className="mt-4 w-full rounded-2xl bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700 focus:outline-none"
+          className="mt-4 w-full rounded-2xl bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700 cursor-pointer focus:outline-none"
         >
           Next
         </button>
