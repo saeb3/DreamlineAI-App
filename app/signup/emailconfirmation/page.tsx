@@ -9,12 +9,10 @@ const EmailConfirmation = () => {
   const router = useRouter();
 
   const handleCodeChange = (e: any) => {
-    console.log("Code changed:", e.target.value);
     setCode(e.target.value);
   };
 
   const handleNext = (e: any) => {
-    console.log("Code entered:", code);
     router.push(`/signup/choice`);
   };
 
@@ -86,6 +84,11 @@ const EmailConfirmation = () => {
           placeholder="Enter Code"
           value={code}
           onChange={handleCodeChange}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleNext(e);
+            }
+          }}
           className="w-full p-4 border border-gray-300 rounded-lg text-gray-600 focus:outline-none focus:border-blue-500"
         />
       </div>
