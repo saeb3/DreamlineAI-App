@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -23,6 +23,19 @@ const IncetiveProviderChoice = () => {
     }
   };
 
+  useEffect(() => {
+      const handleKeyDown = (e: any) => {
+        if (e.key === "Enter" && selectedOption) {
+          handleNext(e);
+        }
+      };
+  
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }, [selectedOption]);
+
   return (
     <div className="flex max-w-md min-h-screen flex-col bg-gray-50 text-black">
       <header className="flex items-center justify-between px-4 py-4 shadow-sm bg-white">
@@ -43,7 +56,7 @@ const IncetiveProviderChoice = () => {
           />
         </span>
         <h1 className="text-xl text-black font-bold">
-          What brings you to dreamlineAi ?
+          What is your role?
         </h1>
       </div>
 
