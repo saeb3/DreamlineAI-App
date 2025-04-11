@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 import Image from "next/image";
 
 export default function SignUpPage() {
@@ -10,15 +11,16 @@ export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const router = useRouter();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: Handle sign-up logic here (e.g., call API)
     console.log({ username, email, password });
+    router.push("/signup/emailconfirmation");
   };
 
   return (
     <div className="flex max-w-md min-h-screen flex-col bg-gray-50">
-      {/* Top Nav (Mobile menu icon, brand, etc.) */}
       <header className="flex items-center justify-between px-4 py-4 shadow-sm bg-white">
         <Image 
             src="/images/logo.png"
@@ -33,9 +35,7 @@ export default function SignUpPage() {
         </button>
       </header>
 
-      {/* Main content container */}
       <main className="flex flex-1 flex-col items-center justify-center">
-        {/* Card container */}
         <div className="w-full max-w-md rounded-lg bg-white shadow-md text-center">
           <h2 className="mb-2 text-2xl font-semibold text-gray-800">
             Create Account
@@ -91,20 +91,18 @@ export default function SignUpPage() {
 
                 <button
                   type="submit"
-                  className="mt-4 w-full rounded-2xl bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700 focus:outline-none"
+                  className="mt-4 w-full rounded-2xl bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700 cursor-pointer focus:outline-none"
                 >
                   Register
                 </button>
               </form>
 
-              {/* Divider / or */}
               <div className="my-6 flex items-center">
                 <hr className="w-full border-gray-300" />
                 <span className="mx-2 text-gray-400">OR</span>
                 <hr className="w-full border-gray-300" />
               </div>
 
-              {/* Social Logins */}
               <div className="flex flex-col space-y-3 p-8">
                 <button className="flex items-center justify-center rounded border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100">
                   <svg className="mr-2 h-5 w-5" viewBox="0 0 48 48">
@@ -140,7 +138,6 @@ export default function SignUpPage() {
                 </button>
               </div>
 
-              {/* Footer: login link */}
               <p className="mt-6 text-center text-sm text-gray-500">
                 Already have an account?{" "}
                 <Link
