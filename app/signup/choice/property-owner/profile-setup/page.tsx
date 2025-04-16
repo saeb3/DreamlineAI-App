@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { z } from "zod";
 
 export const US_STATES = [
   { code: "AL", name: "Alabama" },
@@ -57,7 +57,33 @@ export const US_STATES = [
   { code: "WY", name: "Wyoming" },
 ];
 
+//Zod schema
+const formSchema = z.object({
+  dateOfBirth: z.string().min(1, "Date of birth is required"),
+  gender: z.string().optional(),
+  selfDescription: z.string().optional(),
+  email: z.string().email("Invalid email address"),
+  address: z.object({
+    street: z.string().min(1, "Street address is required"),
+    address2: z.string().optional(),
+    city: z.string().min(1, "City is required"),
+    state: z.string().min(1, "State is required"),
+    zipCode: z.string().min(1, "Zip code is required"),
+  }),
+  renewableTech: z.object({
+    windows: z.union([z.boolean(), z.string()]),
+    heating: z.union([z.boolean(), z.string()]),
+    water: z.union([z.boolean(), z.string()]),
+    lighting: z.union([z.boolean(), z.string()]),
+    solar: z.union([z.boolean(), z.string()]),
+    ev: z.union([z.boolean(), z.string()]),
+    notSure: z.union([z.boolean(), z.string()]),
+  }),
+  sector: z.string().min(1, "Sector selection is required"),
+});
+
 const PropertyOwnerSetup = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     dateOfBirth: "",
     gender: "",
@@ -114,15 +140,21 @@ const PropertyOwnerSetup = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-    // Add your submission logic here
+
+    try {
+      const validatedData = formSchema.parse(formData);
+      console.log("Form validated and submitted:", validatedData);
+    } catch (error: any) {
+      console.log("Validation errors:", error.errors);
+    }
   };
 
   const handleCancel = () => {
     console.log("Form cancelled");
-    // Add your cancel logic here
+    router.back();
   };
 
   return (
