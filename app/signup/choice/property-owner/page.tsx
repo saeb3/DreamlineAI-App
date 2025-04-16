@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const PropertyOwnerChoice = () => {
@@ -14,20 +14,24 @@ const PropertyOwnerChoice = () => {
 
   const handleNext = (e: any) => {
     e.preventDefault();
+    if (selectedOption === "home") {
+      router.push("/signup/choice/property-owner/profile-setup");
+    }
+    //else if (selectedOption === "incentives") {
   };
 
   useEffect(() => {
-      const handleKeyDown = (e: any) => {
-        if (e.key === "Enter" && selectedOption) {
-          handleNext(e);
-        }
-      };
-  
-      window.addEventListener("keydown", handleKeyDown);
-      return () => {
-        window.removeEventListener("keydown", handleKeyDown);
-      };
-    }, [selectedOption]);
+    const handleKeyDown = (e: any) => {
+      if (e.key === "Enter" && selectedOption) {
+        handleNext(e);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedOption]);
 
   return (
     <div className="flex max-w-md min-h-screen flex-col bg-gray-50 text-black">
@@ -37,7 +41,10 @@ const PropertyOwnerChoice = () => {
       </header>
 
       <div className="flex items-center p-4">
-        <span className="text-xl mr-4 hover:cursor-pointer" onClick={() => router.back()}>
+        <span
+          className="text-xl mr-4 hover:cursor-pointer"
+          onClick={() => router.back()}
+        >
           <Image
             src="/images/signup/back_arrow.png"
             alt="Signup Page Logo"
@@ -45,9 +52,7 @@ const PropertyOwnerChoice = () => {
             height={30}
           />
         </span>
-        <h1 className="text-xl text-black font-bold">
-          What is your role?
-        </h1>
+        <h1 className="text-xl text-black font-bold">What is your role?</h1>
       </div>
 
       <div className="p-4 bg-gray-50 text-black">
@@ -121,7 +126,7 @@ const PropertyOwnerChoice = () => {
         >
           <div className="flex items-center">
             <span className="mr-4 text-xl">
-            <Image
+              <Image
                 src="/images/signup/landlord_vector.png"
                 alt="Home Icon"
                 width={24}
@@ -179,6 +184,7 @@ const PropertyOwnerChoice = () => {
       <div className="p-4 mt-auto">
         <button
           type="submit"
+          onClick={handleNext}
           className="mt-4 w-full rounded-2xl bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700 cursor-pointer focus:outline-none"
         >
           Next
