@@ -1,4 +1,3 @@
-// app/profile/view/page.tsx (App Router)
 "use client";
 
 import Link from "next/link";
@@ -8,6 +7,7 @@ import Image from "next/image";
 
 export default function ProfileViewPage() {
   const router = useRouter();
+  type SectionKey = keyof typeof editModes;
   
   // Profile data state
   const [profile, setProfile] = useState({
@@ -85,7 +85,7 @@ export default function ProfileViewPage() {
   }, [profile]);
 
   // Toggle edit mode for a section
-  const toggleEditMode = (section: any) => {
+  const toggleEditMode = (section: SectionKey) => {
     setEditModes(prev => ({
       ...prev,
       [section]: !prev[section]
@@ -105,7 +105,7 @@ export default function ProfileViewPage() {
   };
 
   // Handle form input changes
-  const handleInputChange = (section: any, value: any) => {
+  const handleInputChange = (section: SectionKey, value: any) => {
     setFormState(prev => ({
       ...prev,
       [section]: value
@@ -181,7 +181,7 @@ export default function ProfileViewPage() {
   };
 
   // Save changes for a section
-  const saveChanges = (section: any) => {
+  const saveChanges = (section: SectionKey) => {
     setProfile(prev => {
       if (section === 'contact') {
         return {
@@ -209,7 +209,7 @@ export default function ProfileViewPage() {
   };
 
   // Cancel edits
-  const cancelEdits = (section: any) => {
+  const cancelEdits = (section: SectionKey) => {
     setEditModes(prev => ({
       ...prev,
       [section]: false
