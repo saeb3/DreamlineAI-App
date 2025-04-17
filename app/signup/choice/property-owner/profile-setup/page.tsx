@@ -108,7 +108,7 @@ const PropertyOwnerSetup = () => {
     sector: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target;
 
     if (name.includes(".")) {
