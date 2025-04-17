@@ -85,7 +85,7 @@ export default function ProfileViewPage() {
   }, [profile]);
 
   // Toggle edit mode for a section
-  const toggleEditMode = (section) => {
+  const toggleEditMode = (section: any) => {
     setEditModes(prev => ({
       ...prev,
       [section]: !prev[section]
@@ -209,7 +209,7 @@ export default function ProfileViewPage() {
   };
 
   // Cancel edits
-  const cancelEdits = (section) => {
+  const cancelEdits = (section: any) => {
     setEditModes(prev => ({
       ...prev,
       [section]: false
