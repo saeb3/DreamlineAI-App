@@ -19,7 +19,7 @@ const DreamlineOnboarding = () => {
     } else if (selectedOption === "incentive-provider") {
       router.push("/signup/choice/incentive-provider");
     } else if (selectedOption === "contractor") {
-      router.push("/signup/choice/contractor");
+      router.push("/contractor/finish-setup");
     }
   };
 
