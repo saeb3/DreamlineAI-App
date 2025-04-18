@@ -31,35 +31,38 @@ const PropertyOwnerSetup = () => {
     sector: "",
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value, type, checked } = e.target;
 
-    if (name.includes(".")) {
-      // For nested objects like address
-      const [parent, child] = name.split(".");
-      setFormData({
-        ...formData,
+    if (name.startsWith("address.")) {
+      const [parent, child] = name.split(".") as [
+        "address",
+        keyof typeof formData.address
+      ];
+      setFormData((prev) => ({
+        ...prev,
         [parent]: {
-          ...formData[parent],
+          ...prev[parent],
           [child]: value,
         },
-      });
-    } else if (name.includes("renewableTech.")) {
-      // For checkbox groups
-      const tech = name.split(".")[1];
-      setFormData({
-        ...formData,
+      }));
+    } else if (name.startsWith("renewableTech.")) {
+      const tech = name.split(".")[1] as keyof typeof formData.renewableTech;
+      setFormData((prev) => ({
+        ...prev,
         renewableTech: {
-          ...formData.renewableTech,
+          ...prev.renewableTech,
           [tech]: checked,
         },
-      });
+      }));
     } else {
-      // For direct properties
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
+      const key = name as keyof typeof formData;
+      setFormData((prev) => ({
+        ...prev,
+        [key]: type === "checkbox" ? checked : value,
+      }));
     }
   };
 
