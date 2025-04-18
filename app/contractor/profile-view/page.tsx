@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function ProfileViewPage() {
   const router = useRouter();
-  type SectionKey = keyof typeof editModes;
+  type SectionKey = 'contact' | 'website' | 'specialties' | 'about' | 'projects' | 'materials' | 'incentives';
   
   // Profile data state
   const [profile, setProfile] = useState({
@@ -88,21 +88,38 @@ export default function ProfileViewPage() {
   const toggleEditMode = (section: SectionKey) => {
     setEditModes(prev => ({
       ...prev,
-      [section]: !prev[section]
+      [section]: !prev[section],
     }));
-    
-    // Reset form state for that section when enabling edit mode
+  
     if (!editModes[section]) {
       setFormState(prev => ({
         ...prev,
-        [section]: section === 'incentives' ? [...profile.incentives] :
-                  section === 'projects' ? [...profile.completedProjects] :
-                  section === 'specialties' ? [...profile.specialties] :
-                  section === 'materials' ? [...profile.materials] :
-                  profile[section]
+        ...(section === 'contact' && {
+          phone: profile.phone,
+          email: profile.email,
+        }),
+        ...(section === 'website' && {
+          website: profile.website,
+        }),
+        ...(section === 'specialties' && {
+          specialties: [...profile.specialties],
+        }),
+        ...(section === 'about' && {
+          about: profile.about,
+        }),
+        ...(section === 'projects' && {
+          projects: [...profile.completedProjects],
+        }),
+        ...(section === 'materials' && {
+          materials: [...profile.materials],
+        }),
+        ...(section === 'incentives' && {
+          incentives: [...profile.incentives],
+        }),
       }));
     }
   };
+  
 
   // Handle form input changes
   const handleInputChange = (section: SectionKey, value: any) => {
