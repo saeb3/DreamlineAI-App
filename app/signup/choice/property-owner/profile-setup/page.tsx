@@ -34,7 +34,9 @@ const PropertyOwnerSetup = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value, type, checked } = e.target;
+    const target = e.target;
+    const { name, value, type } = target;
+    const checked = (target as HTMLInputElement).checked;
 
     if (name.startsWith("address.")) {
       const [parent, child] = name.split(".") as [
