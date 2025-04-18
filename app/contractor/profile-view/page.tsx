@@ -8,6 +8,7 @@ import Image from "next/image";
 export default function ProfileViewPage() {
   const router = useRouter();
   type SectionKey = 'contact' | 'website' | 'specialties' | 'about' | 'projects' | 'materials' | 'incentives';
+  type FormFieldKey = | SectionKey | 'phone' | 'email' | 'about' | 'website' | 'specialties' | 'projects' | 'materials' | 'incentives';
   
   // Profile data state
   const [profile, setProfile] = useState({
@@ -122,10 +123,10 @@ export default function ProfileViewPage() {
   
 
   // Handle form input changes
-  const handleInputChange = (section: SectionKey, value: any) => {
+  const handleInputChange = (field: FormFieldKey, value: any) => {
     setFormState(prev => ({
       ...prev,
-      [section]: value
+      [field]: value,
     }));
   };
 
