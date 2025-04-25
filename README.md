@@ -1,6 +1,6 @@
 # Incentive App
 
-This is a basic [Next.js](https://nextjs.org) application bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is an App which facilitates Stakeholders to deploy Government Incentives, Contractors to showcase their services, and Property owner to apply for Government Incentives.
 
 ## Getting Started
 
