@@ -11,7 +11,7 @@ export default function ScheduleImpactPage() {
   const handleBookSchedule = () => {
     // Handle booking logic
     console.log("Booking schedule");
-    router.push("/confirmation");
+    router.push("/contractor/schedule-assessment");
   };
 
   return (
