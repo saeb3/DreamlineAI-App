@@ -26,7 +26,7 @@ const formSchema = z.object({
 function page() {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
-  const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(false);
   const currentMonth = "October 2024";
   const [formData, setFormData] = useState({
     date: "",
@@ -413,7 +413,7 @@ function page() {
             />
           </div>
           <h1 className="text-2xl font-bold">
-            Schedule your Energy Assessment{" "}
+            Schedule your Energy Assessment
           </h1>
           <p>
             Discover personalized home upgrades! Schedule your energy assessment
