@@ -3,15 +3,29 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ScrollNav, ScrollNavItem } from "@/components/ScrollNav";
+import { ScrollNav, ScrollNavItem } from "@/app/contractor/task/components/ScrollNav";
+import { TaskSection, Task, FilterType } from "@/app/contractor/task/components/TaskSection";
 
 export default function TaskPage() {
   const router = useRouter();
 
   // Manage the currently active tab
   const [activeTab, setActiveTab] = useState<
-    "Task" | "Projects" | "Materials" | "Settings"
+    "Task" | "Projects" | "Materials" | "Settings" | "Performance" | "Chats"
   >("Task");
+
+  const [filter, setFilter] = useState<FilterType | null>(null);
+
+  // Dummy tasks data
+  const [tasks, setTasks] = useState<Task[]>([
+    // { id: "1", title: "Site preparation", status: "Pending" },
+    // { id: "2", title: "Foundation work", status: "In progress" },
+    // { id: "3", title: "Framing", status: "Completed" },
+    // { id: "4", title: "Water", status: "Completed" },
+    // … more data
+  ]);
+
+  
 
   // Define navigation items for ScrollNav
   const navItems: ScrollNavItem[] = [
@@ -39,6 +53,18 @@ export default function TaskPage() {
       active: activeTab === "Settings",
       onClick: () => setActiveTab("Settings"),
     },
+    {
+      key: "performance",
+      label: "Performance",
+      active: activeTab === "Performance",
+      onClick: () => setActiveTab("Performance"),
+    },
+    {
+      key: "chats",
+      label: "Chats",
+      active: activeTab === "Chats",
+      onClick: () => setActiveTab("Chats"),
+    },
   ];
 
   return (
@@ -61,7 +87,15 @@ export default function TaskPage() {
       {/* Scrollable navigation bar */}
       <ScrollNav items={navItems} />
 
-      {/* Next: TaskSection and FooterIcons go here */}
+      {/* TaskSection */}
+      <TaskSection
+        tasks={tasks}
+        filter={filter}
+        onCreate={() => router.push("/contractor/tasks/new")}
+        onFilterChange={setFilter} 
+      />
+
+      {/* Next: FooterIcons go here */}
     </div>
   );
 }
