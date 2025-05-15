@@ -18,7 +18,7 @@ export interface TaskSectionProps {
   tasks: Task[];
   filter: FilterType | null;   // null indicates no filter (show all tasks)
   onCreate: () => void;
-  onFilterChange: (filter: FilterType) => void;
+  onFilterChange: (filter: FilterType | null) => void;
 }
 
 /**
@@ -34,6 +34,8 @@ export function TaskSection({
   // Filter tasks based on selected status
   // Determine which tasks to display: if no filter is selected, show all tasks
   const filteredTasks = filter ? tasks.filter((task) => task.status === filter) : tasks;
+  
+  const noneAtAll = tasks.length === 0;
 
   return (
     <section className="bg-gray-50 p-4 flex flex-col gap-[124px] ">
@@ -57,13 +59,13 @@ export function TaskSection({
             (status) => {
               const count = tasks.filter((t) => t.status === status).length;
               const isActive = filter === status;
-              const isDisabled = tasks.length === 0;
+              const isDisabled = noneAtAll;
 
               return (
                 <button
                   key={status}
                   type="button"
-                  onClick={() => onFilterChange(status)}
+                  onClick={() => onFilterChange(isActive ? null : status)}
                   disabled={isDisabled}
                   className={`
                     flex flex-col justify-center items-start
@@ -126,7 +128,7 @@ export function TaskSection({
         </div>
       </div>
       {/* Task List or No-Tasks Placeholder */}
-      {filteredTasks.length === 0 ? (
+      {noneAtAll ? (
         <div className="flex flex-1 justify-center items-center">
           <img
             src="/images/contractor/task/no-task.svg"

@@ -18,10 +18,10 @@ export default function TaskPage() {
 
   // Dummy tasks data
   const [tasks, setTasks] = useState<Task[]>([
-    // { id: "1", title: "Site preparation", status: "Pending" },
-    // { id: "2", title: "Foundation work", status: "In progress" },
-    // { id: "3", title: "Framing", status: "Completed" },
-    // { id: "4", title: "Water", status: "Completed" },
+    { id: "1", title: "Site preparation", status: "Pending" },
+    { id: "2", title: "Foundation work", status: "In progress" },
+    { id: "3", title: "Framing", status: "Completed" },
+    { id: "4", title: "Water", status: "Completed" },
     // … more data
   ]);
 
