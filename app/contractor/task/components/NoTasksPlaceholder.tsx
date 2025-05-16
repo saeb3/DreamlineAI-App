@@ -4,7 +4,7 @@ import React from "react";
 
 export function NoTasksPlaceholder() {
   return (
-    <div className="flex flex-1 justify-center items-center">
+    <div className="flex flex-1 justify-center items-center mt-[92px]">
       <img
         src="/images/contractor/task/no-task.svg"
         alt="No tasks illustration"

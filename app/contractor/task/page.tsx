@@ -18,11 +18,56 @@ export default function TaskPage() {
 
   // Dummy tasks data
   const [tasks, setTasks] = useState<Task[]>([
-    { id: "1", title: "Site preparation", status: "Pending" },
-    { id: "2", title: "Foundation work", status: "In progress" },
-    { id: "3", title: "Framing", status: "Completed" },
-    { id: "4", title: "Water", status: "Completed" },
-    // … more data
+    {
+      id: "1",
+      title: "Site preparation",
+      description: "Clear and level construction site.",
+      status: "Pending",
+      startDate: "2024-08-10",
+      endDate: "2024-08-24",
+      assignedCount: 2,
+      hasFiles: true,
+    },
+    {
+      id: "2",
+      title: "Foundation work",
+      description: "Excavate and pour concrete foundation.",
+      status: "In progress",
+      startDate: "2024-08-12",
+      endDate: "2024-08-26",
+      assignedCount: 3,
+      hasFiles: false,
+    },
+    {
+      id: "3",
+      title: "Framing",
+      description: "Construct frame structure.",
+      status: "Completed",
+      startDate: "2024-08-05",
+      endDate: "2024-08-15",
+      assignedCount: 4,
+      hasFiles: true,
+    },
+    {
+      id: "4",
+      title: "Water",
+      description: "Install water pipes.",
+      status: "Completed",
+      startDate: "2024-08-07",
+      endDate: "2024-08-19",
+      assignedCount: 1,
+      hasFiles: false,
+    },
+    {
+      id: "5",
+      title: "Heater",
+      description: "Install heater.",
+      status: "Overdue",
+      startDate: "2024-09-07",
+      endDate: "2024-09-19",
+      assignedCount: 5,
+      hasFiles: false,
+    },
   ]);
 
   

@@ -16,6 +16,10 @@ export interface Task {
   title: string;
   description?: string;
   status: FilterType;
+  startDate: string; // ex: '2024-08-10'
+  endDate: string;   // ex: '2024-08-24'
+  assignedCount?: number; 
+  hasFiles?: boolean;     
 }
 
 export interface TaskSectionProps {
@@ -41,7 +45,7 @@ export function TaskSection({
   const noneAtAll = tasks.length === 0;
 
   return (
-    <section className="bg-gray-50 p-4 flex flex-col gap-[124px] ">
+    <section className="bg-gray-50 p-4 flex flex-col gap-[32px] ">
       <div className="flex flex-col gap-[12px] w-full">
         {/* Header: Create Task Button */}
         <TaskHeader total={tasks.length} onCreate={onCreate} />
