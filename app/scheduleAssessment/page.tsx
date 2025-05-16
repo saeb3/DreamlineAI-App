@@ -23,12 +23,26 @@ const formSchema = z.object({
   }),
 });
 
+type FormData = {
+  date: string;
+  timezone: string;
+  timeSlot: string;
+  notes: string;
+  address: {
+    street: string;
+    addressLine2: string;
+    city: string;
+    state: string;
+    zipCode: string;
+  };
+};
+
 function page() {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [showForm, setShowForm] = useState(false);
   const currentMonth = "October 2024";
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     date: "",
     timezone: "",
     timeSlot: "",
@@ -41,7 +55,7 @@ function page() {
       zipCode: "",
     },
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const router = useRouter();
 
   // Calendar data
@@ -54,15 +68,15 @@ function page() {
   // Time slots
   const timeSlots = ["11:00 am", "12:00 pm", "1:00 pm", "2:00 pm"];
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
     if (name.includes(".")) {
-      const [parent, child] = name.split(".");
+      const [parent, child] = name.split(".") as [keyof FormData, string];
       setFormData({
         ...formData,
         [parent]: {
-          ...formData[parent],
+          ...(formData[parent] as Record<string, string>),
           [child]: value,
         },
       });
@@ -74,7 +88,7 @@ function page() {
     }
   };
 
-  const handleDateSelect = (day) => {
+  const handleDateSelect = (day: any) => {
     const dateStr = `${currentMonth} ${day}`;
     setSelectedDate(dateStr);
     setFormData({
@@ -83,7 +97,7 @@ function page() {
     });
   };
 
-  const handleTimeSlotSelect = (slot) => {
+  const handleTimeSlotSelect = (slot: any) => {
     setSelectedTimeSlot(slot);
     setFormData({
       ...formData,
@@ -101,7 +115,7 @@ function page() {
       // Here you would typically send the data to your backend
     } catch (error) {
       if (error instanceof z.ZodError) {
-        const errorMessages = {};
+        const errorMessages: Record<string, string> = {};
         error.errors.forEach((err) => {
           const path = err.path.join(".");
           errorMessages[path] = err.message;
