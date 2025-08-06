@@ -49,7 +49,7 @@ export default function ReportReady() {
                 start saving on energy-efficient upgrades.
                 </p>
                 <Link
-                href="/signup/choice/property-owner/incentives"
+                href="/incentives-page"
                 className="mt-2 inline-block px-6 py-2 bg-blue-600 text-white rounded-full block w-full text-center"
                 >
                 Incentives

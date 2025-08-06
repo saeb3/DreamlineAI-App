@@ -15,7 +15,7 @@ const PropertyOwnerChoice = () => {
   const handleNext = (e: any) => {
     e.preventDefault();
     if (selectedOption === "home") {
-      router.push("/signup/choice/property-owner/profile-setup");
+      router.push("/signup/choice/property-owner/report-ready");
     }
     //else if (selectedOption === "incentives") {
   };
