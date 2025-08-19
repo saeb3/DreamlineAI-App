@@ -17,15 +17,38 @@ export interface ScrollNavProps {
  * ScrollNav
  * Renders a full-width, horizontally scrollable navigation bar with tabs.
  */
-export function ScrollNav({ items }: ScrollNavProps) {
+
+// export function ScrollNav({ items }: ScrollNavProps) {
+export default function ScrollNav({
+  activeTab,
+  items,
+}: {
+  activeTab: string;
+  items: Array<{ key: string; label: string; active: boolean; onClick: () => void }>;
+}) {
   return (
+    <div className="relative w-full bg-gray-50">
+      {/* Image Section */}
+      {!activeTab && (
+        <img
+          src="/images/Dashboard/Frame 1000002715.jpg"
+          alt="Dashboard Welcome"
+          className="absolute object-contain"
+          style={{
+            width: "405px",
+            height: "372px",
+            top: "168px",
+            left: "12.5px",
+            gap: "52px",
+          }}
+        />
+      )}
     <nav
       className={
         `
         w-full               
         flex flex-row items-center
         px-3 py-0 gap-3
-        overflow-x-auto
         bg-white border-b border-gray-300
       `}
     >
@@ -50,5 +73,6 @@ export function ScrollNav({ items }: ScrollNavProps) {
         </button>
       ))}
     </nav>
+    </div>
   );
 }
