@@ -27,7 +27,7 @@ export default function ScrollNav({
   items: Array<{ key: string; label: string; active: boolean; onClick: () => void }>;
 }) {
   return (
-    <div className="relative w-full bg-gray-50">
+    <div className="w-full bg-gray-50">
       {/* Image Section */}
       {!activeTab && (
         <img
