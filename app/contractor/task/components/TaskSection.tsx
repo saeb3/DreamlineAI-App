@@ -33,8 +33,8 @@ export interface TaskSectionProps {
  * TaskSection
  * Renders the task header, filter buttons, and either a task list or a no-tasks placeholder.
  */
-export function TaskSection({
-  tasks,
+export default function TaskSection({
+  tasks=[],
   filter,
   onCreate,
   onFilterChange,
@@ -81,3 +81,46 @@ export function TaskSection({
     </section>
   );
 }
+
+
+// export default function TaskSection({
+//   tasks = [], // Default value for tasks
+//   filter,
+//   onCreate,
+//   onFilterChange,
+// }: TaskSectionProps) {
+//   // Filter tasks based on selected status
+//   const filteredTasks = filter ? tasks.filter((task) => task.status === filter) : tasks;
+//   const noneAtAll = tasks.length === 0;
+
+//   return (
+//     <section className="bg-gray-50 p-4 flex flex-col gap-[32px] ">
+//       <div className="flex flex-col gap-[12px] w-full">
+//         {/* Header: Create Task Button */}
+//         <TaskHeader total={tasks.length} onCreate={onCreate} />
+
+//         {/* Status Filters */}
+//         <div className="flex justify-center gap-[17px] w-full">
+//           {STATUS_LIST.map((status) => {
+//             const count = tasks.filter((t) => t.status === status).length;
+//             const isActive = filter === status;
+//             const isDisabled = noneAtAll;
+
+//             return (
+//               <button
+//                 key={status}
+//                 disabled={isDisabled}
+//                 className={`px-4 py-2 rounded ${
+//                   isActive ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"
+//                 }`}
+//                 onClick={() => onFilterChange(status)}
+//               >
+//                 {status} ({count})
+//               </button>
+//             );
+//           })}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
