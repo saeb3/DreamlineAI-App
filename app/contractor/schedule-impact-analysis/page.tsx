@@ -13,7 +13,7 @@ export default function ScheduleImpactPage() {
     console.log("Booking schedule");
     router.push("/contractor/schedule-assessment");
   };
-
+    
   return (
     <div className="flex max-w-md min-h-screen flex-col bg-gray-50">
       <header className="flex items-center justify-between px-4 py-4 shadow-sm bg-white">
