@@ -11,7 +11,11 @@ const DreamlineDashboard = () => {
   const [activeTab, setActiveTab] = useState(null);
   
   return (
+
+    <div className="flex max-w-md min-h-screen flex-col bg-gray-50">
+
     <div className="max-w-md min-h-screen flex-col bg-gray-50">
+
         <header className="flex items-center justify-between px-4 py-4 shadow-sm bg-white">
             <Image
                 src="/images/logo.png"
@@ -19,6 +23,35 @@ const DreamlineDashboard = () => {
                 width={120}
                 height={40}
             />
+
+            <button className="text-3xl">☰</button>
+        </header>
+ 
+        <footer>
+          <div className="fixed bottom-0 left-0 w-full max-w-md">
+            <div className="bg-white shadow-md border-t border-gray-300 flex justify-around items-center py-2">
+              {/* Profile */}
+              <button className="p-2">
+                <User size={24} />
+              </button>
+              {/* Help */}
+              <button className="p-2">
+                <HelpCircle size={24} />
+              </button>
+              {/* Home */}
+              <button className="p-2">
+                <Home size={24} />
+              </button>
+              {/* Notifications */}
+              <button className="p-2">
+                <Bell size={24} />
+              </button>
+              {/* Search */}
+              <button className="p-2">
+                <Search size={24} />
+              </button>
+            </div>
+
             {/* <Image 
                 src="/images/hamburger_menu_mobile.png"
                 alt="Menu"
@@ -57,6 +90,7 @@ const DreamlineDashboard = () => {
                   <Search size={24} />
                 </button>
               </div>
+
           </div>
         </footer>
         
@@ -75,6 +109,18 @@ const DreamlineDashboard = () => {
       />
 
       {/* Tab Content Section */}
+
+      <div>
+        <main className="flex flex-1 flex-col items-center max-w-md mx-auto min-h-screen">
+            {activeTab === "task" && <TaskSection />}
+            {activeTab === "projects" && <ProjectSection />} {/* Render ProjectSection */}
+            {activeTab === "materials" && <div>Materials Content</div>}
+            {activeTab === "settings" && <div>Settings Content</div>}
+        </main>
+      </div>
+    </div>
+      
+
       <main className="flex flex-1 flex-col items-center px-4">
         <div className="max-w-md mx-auto bg-white min-h-screen p-4">
           {/* {activeTab === "task" && <div>Task Content</div>} */}
@@ -89,6 +135,7 @@ const DreamlineDashboard = () => {
     // {/* <main className="flex flex-1 flex-col items-center px-4"> */}
     // {/* </main> */}
     // // </div>
+
 
   );
 };
