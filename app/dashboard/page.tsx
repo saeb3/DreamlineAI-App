@@ -8,7 +8,7 @@ import TaskSection from "../contractor/task/components/TaskSection";
 import { User, HelpCircle, Home, Bell, Search } from "lucide-react";
 
 const DreamlineDashboard = () => {
-  const [activeTab, setActiveTab] = useState(null);
+  const [activeTab, setActiveTab] = useState<string>("");
   
   return (
 
@@ -64,7 +64,8 @@ const DreamlineDashboard = () => {
                 <path d="M4 5h16M4 12h16M4 19h16" />
                 </svg>
             </button>
-        </header>
+          </div>
+        </footer>
 
         <footer>
               <div className="fixed bottom-0 left-0 w-full max-w-md">
