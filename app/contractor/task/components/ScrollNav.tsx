@@ -37,7 +37,7 @@ export default function ScrollNav({ activeTab, items }: ScrollNavProps) {
       )}
 
       {/* Scrollable Navigation Tabs */}
-      <nav className="w-full flex flex-row items-center px-3 gap-3 overflow-x-auto bg-white border-b border-gray-300">
+      <nav className="w-full flex flex-row items-center px-3 gap-3 overflow-x-auto no-scrollbar bg-white border-b border-gray-300">
         {items.map(({ key, label, active, onClick }) => (
           <button
             key={key}

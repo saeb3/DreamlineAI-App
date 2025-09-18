@@ -45,13 +45,13 @@ export default function TaskSection({
   const noneAtAll = tasks.length === 0;
 
   return (
-    <section className="bg-gray-50 p-4 flex flex-col gap-[32px] ">
+    <section className="bg-[#F5F5F5] p-4 flex flex-col gap-[32px] ">
       <div className="flex flex-col gap-[12px] w-full">
         {/* Header: Create Task Button */}
         <TaskHeader total={tasks.length} onCreate={onCreate} />
 
         {/* Status Filters */}
-        <div className="flex justify-center gap-[17px] w-full">
+        <div className="flex justify-between items-center w-full">
           {STATUS_LIST.map(
             (status) => {
               const count = tasks.filter((t) => t.status === status).length;
