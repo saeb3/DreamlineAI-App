@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ScrollNav, ScrollNavItem } from "@/app/contractor/task/components/ScrollNav";
-import { TaskSection, Task, FilterType } from "@/app/contractor/task/components/TaskSection";
+import ScrollNav, { type ScrollNavItem } from "@/app/contractor/task/components/ScrollNav";
+import TaskSection, { type Task, type FilterType } from "@/app/contractor/task/components/TaskSection";
+import { CreateTask } from "@/app/contractor/task/components/CreateTask";
 
 export default function TaskPage() {
   const router = useRouter();
@@ -70,6 +71,24 @@ export default function TaskPage() {
     },
   ]);
 
+
+  // create task open/close
+  const [isCreating, setIsCreating] = useState(false);
+  const openCreate = () => setIsCreating(true);
+  const closeCreate = () => setIsCreating(false);
+
+  // add task + auto-filter to its status
+  const addTask = (payload: Omit<Task, "id">) => {
+    const id =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+
+    const newTask: Task = { id, ...payload };
+    setTasks((prev) => [newTask, ...prev]);   // prepend
+    setFilter(newTask.status);                // <-- show under its status immediately
+    closeCreate();
+  };
   
 
   // Define navigation items for ScrollNav
@@ -129,16 +148,22 @@ export default function TaskPage() {
         </button>
       </header>
 
-      {/* Scrollable navigation bar */}
-      <ScrollNav items={navItems} />
 
-      {/* TaskSection */}
-      <TaskSection
-        tasks={tasks}
-        filter={filter}
-        onCreate={() => router.push("/contractor/tasks/new")}
-        onFilterChange={setFilter} 
-      />
+      {/* Scrollable navigation bar */}
+      <ScrollNav activeTab={activeTab} items={navItems} />
+
+      {/* Content: show ONLY one of these at a time */}
+      {isCreating ? (
+        <CreateTask onCancel={closeCreate} onSubmit={addTask} />
+      ) : (
+        <TaskSection
+          tasks={tasks}
+          filter={filter}
+          onCreate={openCreate}     // clicking "Create task" flips to inline form
+          onFilterChange={setFilter}
+        />
+      )}
+
 
       {/* Next: FooterIcons go here */}
     </div>

@@ -53,9 +53,9 @@ export default function ProjectSection() {
   ];
 
   return (
-    <div className="w-full bg-white min-h-screen">
+    <div className="w-full px-4 py-4">
       {/* Welcome Section */}
-      <div className="mb-2 px-3 p-2 mt-4">
+      <div className="mb-2 mt-4">
         <h1 className="text-2xl font-semibold text-gray-800 mb-1">
           Hello Mattew! 👋
         </h1>
@@ -63,7 +63,7 @@ export default function ProjectSection() {
       </div>
 
       {/* Search + Profile + Notifications */}
-      <div className="flex items-center gap-3 mb-4 px-3 p-2">
+      <div className="flex items-center gap-3 mb-4">
         {/* Search Bar */}
         <div className="relative flex-[10]">
           <Search
@@ -92,7 +92,7 @@ export default function ProjectSection() {
       </div>
 
       {/* Filters */}
-      <div className="flex items-center px-3 p-2">
+      <div className="flex items-center mb-3">
         <button
           onClick={() => setShowFilters(!showFilters)}
           className="flex items-center space-x-1 text-gray-600 text-sm"
@@ -103,8 +103,8 @@ export default function ProjectSection() {
       </div>
 
       {/* Pinned Post */}
-      <div className="bg-gray-100 pt-2 pb-7 px-3 mb-1">
-        <div className="border border-gray-300 rounded-lg p-2 flex items-center justify-between bg-white w-full max-w-md mx-auto">
+      <div className="bg-gray-100 pt-4 pb-7 px-0 mb-4 w-full">
+        <div className="border border-gray-300 rounded-lg pt-2 flex items-center justify-between bg-white w-full">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-50">
               <Pin className="w-4 h-4 text-gray-800" />
@@ -121,8 +121,8 @@ export default function ProjectSection() {
       </div>
 
       {/* Manage Bids Section */}
-      <div className="px-3 p-2">
-        <div className="flex items-center justify-between mb-4">
+      <div className="mb-4">
+        <div className="flex items-center justify-between mb-2">
           <h2 className="text-lg font-semibold text-gray-800">Manage Bids</h2>
           <button className="text-blue-500 text-sm flex items-center space-x-1">
             <span className="font-semibold">See All</span>
@@ -231,8 +231,8 @@ export default function ProjectSection() {
       </div>
 
       {/* Approved Projects Section */}
-      <div className="mb-1 px-3 p-2">
-        <div className="flex items-center justify-between mb-3">
+      <div className="mb-4">
+        <div className="flex items-center justify-between mb-2">
           <h2 className="text-lg font-semibold text-gray-800">
             Approved Projects
           </h2>
@@ -264,8 +264,8 @@ export default function ProjectSection() {
       </div>
 
       {/* My Applications Section */}
-      <div className="mb-6 px-3 p-2">
-        <div className="flex items-center justify-between mb-4">
+      <div>
+        <div className="flex items-center justify-between mb-2">
           <h2 className="text-lg font-semibold text-gray-800">
             My Application
           </h2>
