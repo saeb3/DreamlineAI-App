@@ -23,9 +23,9 @@ const statusText = (s: Task["status"]) =>
    : s === "Pending"     ? "text-[#0057A0]"
    :                       "text-[#D53E2A]";
 
-export interface TaskListProps { tasks: Task[] }
+export interface TaskListProps { tasks: Task[]; title?: string }
 
-export function TaskList({ tasks }: TaskListProps) {
+export function TaskList({ tasks, title = "All Tasks" }: TaskListProps) {
   // group by status
   const grouped: Record<Task["status"], Task[]> = {
     Completed: [],
@@ -40,7 +40,7 @@ export function TaskList({ tasks }: TaskListProps) {
       {/* All Task header */}
       <div className="w-full px-2">
         <span className="font-poppins font-semibold text-[16px] leading-[24px] text-black">
-          All Task
+         {title}
         </span>
       </div>
 

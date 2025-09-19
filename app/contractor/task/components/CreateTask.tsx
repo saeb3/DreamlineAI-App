@@ -90,22 +90,29 @@ export function CreateTask({ onCancel, onSubmit }: CreateTaskProps) {
 
   const [touched, setTouched] = useState(false);
 
-  const invalid =
-    !title.trim() ||
-    !startDate ||
-    !endDate ||
-    new Date(startDate) > new Date(endDate);
+//  const invalid =
+//    !title.trim() ||
+//    !startDate ||
+//    !endDate ||
+//    new Date(startDate) > new Date(endDate);
+
+  const invalid = !title.trim();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setTouched(true);
+
+    if (new Date(startDate) > new Date(endDate)) {
+        // touched=true will trigger your inline error message
+        return;
+    }
     if (invalid) return;
 
     const assignedCount = people.filter((p) => p.trim()).length || undefined;
 
     onSubmit({
       title: title.trim(),
-      status: "Pending" as FilterType, // default; change if needed
+      status: "In progress" as FilterType, // default; change if needed
       startDate,
       endDate,
       assignedCount,
