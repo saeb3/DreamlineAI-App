@@ -1,9 +1,8 @@
-// app/contractor/task/components/CreateTask.tsx
 "use client";
 
 import React, { useMemo, useRef, useState } from "react";
 import type { Task, FilterType } from "./TaskSection";
-import { CalendarDays, Plus, UserRoundPlus, ListChecks } from "lucide-react";
+import { CalendarDays, Plus, UserRoundPlus } from "lucide-react";
 
 interface CreateTaskProps {
   onCancel: () => void;
@@ -27,8 +26,6 @@ const fmt = (v: string) =>
       })
     : "";
 
-// A clickable row with a calendar icon; clicking opens the native date picker.
-// The input is invisible but sits on top to capture clicks and open the picker.
 function DateRow({
   label,
   value,
@@ -55,15 +52,10 @@ function DateRow({
 
   return (
     <div className="flex items-center gap-2 h-12">
-      {/* calendar icon opens the native picker */}
       <button type="button" onClick={openPicker} className="p-1 -ml-1">
         <CalendarDays className="w-4 h-4 text-gray-600" />
       </button>
-
-      {/* label text */}
       <span className="text-sm font-semibold text-black">{label}</span>
-
-      {/* visually-hidden date input used to trigger the picker */}
       <input
         ref={inputRef}
         type="date"
@@ -76,56 +68,59 @@ function DateRow({
   );
 }
 
-
 export function CreateTask({ onCancel, onSubmit }: CreateTaskProps) {
   const defaultDate = useMemo(() => todayISO(), []);
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState(defaultDate);
   const [endDate, setEndDate] = useState(defaultDate);
 
-  // UI-only lists; collapse to assignedCount for Task payload
   const [people, setPeople] = useState<string[]>(["", ""]);
   const [subTasks, setSubTasks] = useState<string[]>(["", ""]);
   const [useSubTasks, setUseSubTasks] = useState(true);
 
   const [touched, setTouched] = useState(false);
 
-  const invalid =
-    !title.trim() ||
-    !startDate ||
-    !endDate ||
-    new Date(startDate) > new Date(endDate);
+  const invalid = !title.trim();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setTouched(true);
+
+    if (new Date(startDate) > new Date(endDate)) {
+      return;
+    }
     if (invalid) return;
 
     const assignedCount = people.filter((p) => p.trim()).length || undefined;
 
     onSubmit({
       title: title.trim(),
-      status: "Pending" as FilterType, // default; change if needed
+      status: "In progress" as FilterType,
       startDate,
       endDate,
       assignedCount,
       hasFiles: false,
-      // description?: add if you add a textarea
     });
   };
+
+  // ✅ Common input styles for consistency
+  const inputClass =
+    "w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 text-black placeholder:text-gray-400";
 
   return (
     <div className="w-full max-w-md mx-auto px-4 py-4">
       <h3 className="text-xl font-semibold text-black mb-3">New Task</h3>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Card: Task Title + Time (combined) */}
-        <div className="rounded-2xl bg-[#ffffff] p-4 space-y-5">
+        {/* Task Title + Time */}
+        <div className="rounded-2xl bg-white p-4 space-y-5">
           {/* Task Title */}
           <div>
-            <div className="text-sm font-semibold text-gray-700 mb-2">Task Title</div>
+            <div className="text-sm font-semibold text-gray-700 mb-2">
+              Task Title
+            </div>
             <input
-              className="w-full h-12 rounded-2xl border border-black-100 px-4 text-[16px] font-semibold outline-none focus:border-[#0070E0]"
+              className={`${inputClass} h-12 text-[16px] font-semibold`}
               placeholder="Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -138,19 +133,22 @@ export function CreateTask({ onCancel, onSubmit }: CreateTaskProps) {
           {/* Time */}
           <div>
             <div className="text-sm font-semibold text-gray-700">Time</div>
-
-            <DateRow label="Starting date" value={startDate} onChange={setStartDate} />
-
+            <DateRow
+              label="Starting date"
+              value={startDate}
+              onChange={setStartDate}
+            />
             <DateRow label="End date" value={endDate} onChange={setEndDate} />
-
             {touched && new Date(startDate) > new Date(endDate) && (
-              <p className="text-xs text-red-600">End date must be after start date.</p>
+              <p className="text-xs text-red-600">
+                End date must be after start date.
+              </p>
             )}
           </div>
         </div>
 
-        {/* Card: Add People */}
-        <div className="rounded-xl bg-[#ffffff] p-4 space-y-3">
+        {/* Add People */}
+        <div className="rounded-xl bg-white p-4 space-y-3">
           <div className="flex items-center gap-2">
             <UserRoundPlus className="w-4 h-4 text-gray-700" />
             <div className="text-sm font-medium text-gray-700">Add People</div>
@@ -161,7 +159,7 @@ export function CreateTask({ onCancel, onSubmit }: CreateTaskProps) {
               key={idx}
               type="email"
               placeholder="Write Email Address.."
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClass}
               value={email}
               onChange={(e) => {
                 const next = [...people];
@@ -180,8 +178,8 @@ export function CreateTask({ onCancel, onSubmit }: CreateTaskProps) {
           </button>
         </div>
 
-        {/* Card: Sub Task */}
-        <div className="rounded-xl bg-[#ffffff] p-4 space-y-3">
+        {/* Sub Tasks */}
+        <div className="rounded-xl bg-white p-4 space-y-3">
           <div className="flex items-center gap-2">
             <input
               id="use-subtasks"
@@ -190,7 +188,10 @@ export function CreateTask({ onCancel, onSubmit }: CreateTaskProps) {
               onChange={(e) => setUseSubTasks(e.target.checked)}
               className="h-4 w-4 rounded border-gray-300"
             />
-            <label htmlFor="use-subtasks" className="text-sm font-medium text-gray-700">
+            <label
+              htmlFor="use-subtasks"
+              className="text-sm font-medium text-gray-700"
+            >
               Sub Task
             </label>
           </div>
@@ -200,7 +201,7 @@ export function CreateTask({ onCancel, onSubmit }: CreateTaskProps) {
               <input
                 key={idx}
                 placeholder="Write task.."
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
                 value={t}
                 onChange={(e) => {
                   const next = [...subTasks];
@@ -227,7 +228,9 @@ export function CreateTask({ onCancel, onSubmit }: CreateTaskProps) {
             type="submit"
             disabled={invalid}
             className={`w-full rounded-full px-5 py-3 text-white text-sm font-semibold ${
-              invalid ? "bg-blue-400 cursor-not-allowed" : "bg-[#0070E0] hover:bg-blue-600"
+              invalid
+                ? "bg-blue-400 cursor-not-allowed"
+                : "bg-[#0070E0] hover:bg-blue-600"
             }`}
           >
             Create task
