@@ -24,14 +24,14 @@ export default function SetPreferencePage() {
               </button> */}
               <button className="text-3xl">☰</button>
             </div>
-            <div className="flex items-center px-4 py-2">
+            <div className="flex items-center px-4 py-2 bg-white">
               <Link href="/signup" className="mr-1 ml-1">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M19 12H5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M12 19L5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
               </Link>
-              <h1 className="flex-1 text-xl font-bold text-center">Set Preference</h1>
+              <h1 className="flex-1 text-xl font-bold text-center text-black">Set Preference</h1>
             </div>
           </header>
             <main className="flex flex-1 flex-col items-center text-black">
