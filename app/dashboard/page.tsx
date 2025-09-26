@@ -6,6 +6,7 @@ import ScrollNav from "../contractor/task/components/ScrollNav";
 import ProjectSection from "../contractor/task/components/ProjectSection";
 import TaskSection from "../contractor/task/components/TaskSection";
 import { User, HelpCircle, Home, Bell, Search } from "lucide-react";
+import SettingSection from "../contractor/task/components/SettingSection";
 
 const DreamlineDashboard = () => {
   const [activeTab, setActiveTab] = useState(null);
@@ -67,7 +68,7 @@ const DreamlineDashboard = () => {
             {activeTab === "task" && <TaskSection />}
             {activeTab === "projects" && <ProjectSection />} 
             {activeTab === "materials" && <div>Materials Content</div>}
-            {activeTab === "settings" && <div>Settings Content</div>}
+            {activeTab === "settings" && <SettingSection />}
         </main>
       </div>
     </div>
