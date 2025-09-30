@@ -47,8 +47,7 @@ export function TaskList({ tasks, title = "All Tasks" }: TaskListProps) {
       {ORDER.map((status) =>
         grouped[status].length ? (
           <div key={status} className="w-full px-2">
-            {/* ⬇️ Removed the outside status header here */}
-
+            
             {grouped[status].map((task) => (
               <div
                 key={task.id}

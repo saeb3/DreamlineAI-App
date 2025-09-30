@@ -10,6 +10,7 @@ import TaskSection, {
 import ProjectSection from "../contractor/task/components/ProjectSection";
 import { CreateTask } from "../contractor/task/components/CreateTask"; // inline creator
 import { User, HelpCircle, Home, Bell, Search } from "lucide-react";
+import MaterialsSection from "../contractor/materials/components/MaterialsSection";
 
 export default function DreamlineDashboard() {
   // ⬅️ Start with no tab selected to show the welcome state
@@ -84,7 +85,7 @@ export default function DreamlineDashboard() {
         )}
 
         {activeTab === "projects" && <ProjectSection />}
-        {activeTab === "materials" && <div>Materials Content</div>}
+        {activeTab === "materials" && <MaterialsSection />}
         {activeTab === "settings" && <div>Settings Content</div>}
       </main>
 
