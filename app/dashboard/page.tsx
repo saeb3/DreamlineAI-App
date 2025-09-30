@@ -10,11 +10,8 @@ import TaskSection, {
 import ProjectSection from "../contractor/task/components/ProjectSection";
 import { CreateTask } from "../contractor/task/components/CreateTask"; // inline creator
 import { User, HelpCircle, Home, Bell, Search } from "lucide-react";
-<<<<<<< HEAD
-import SettingSection from "../contractor/task/components/SettingSection";
-=======
 import MaterialsSection from "../contractor/materials/components/MaterialsSection";
->>>>>>> c8231f129296b0e2b0b09c5d81713f224cd0b251
+import SettingSection from "../contractor/task/components/SettingSection";
 
 export default function DreamlineDashboard() {
   // ⬅️ Start with no tab selected to show the welcome state
@@ -70,17 +67,6 @@ export default function DreamlineDashboard() {
       />
 
       {/* Tab Content Section */}
-<<<<<<< HEAD
-      <div>
-        <main className="flex flex-1 flex-col items-center max-w-md mx-auto min-h-screen">
-            {activeTab === "task" && <TaskSection />}
-            {activeTab === "projects" && <ProjectSection />} 
-            {activeTab === "materials" && <div>Materials Content</div>}
-            {activeTab === "settings" && <SettingSection />}
-        </main>
-      </div>
-    </div>
-=======
       <main
         className={`flex flex-1 flex-col max-w-md min-h-screen ${
           showFooter ? "pb-20" : ""
@@ -98,11 +84,10 @@ export default function DreamlineDashboard() {
             />
           )
         )}
->>>>>>> c8231f129296b0e2b0b09c5d81713f224cd0b251
 
         {activeTab === "projects" && <ProjectSection />}
         {activeTab === "materials" && <MaterialsSection />}
-        {activeTab === "settings" && <div>Settings Content</div>}
+        {activeTab === "settings" && <SettingSection />}
       </main>
 
       {/* Footer */}
