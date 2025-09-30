@@ -32,6 +32,9 @@ export default function DreamlineDashboard() {
   const startCreate = () => setIsCreating(true);
   const cancelCreate = () => setIsCreating(false);
 
+  // Materials: whether "Add Material" form is open
+  const [isAddingMaterial, setIsAddingMaterial] = useState(false);
+
   const addTask = (payload: Omit<Task, "id">) => {
     const id =
       typeof crypto !== "undefined" && "randomUUID" in crypto
@@ -44,7 +47,9 @@ export default function DreamlineDashboard() {
   };
 
   // Hide footer only when creating inside Task tab
-  const showFooter = !(activeTab === "task" && isCreating);
+  const showFooter =
+    !(activeTab === "task" && isCreating) &&
+    !(activeTab === "materials" && isAddingMaterial);
 
   return (
     <div className="max-w-md min-h-screen flex flex-col bg-gray-50">
@@ -85,7 +90,11 @@ export default function DreamlineDashboard() {
         )}
 
         {activeTab === "projects" && <ProjectSection />}
-        {activeTab === "materials" && <MaterialsSection />}
+        
+        {activeTab === "materials" && (
+          <MaterialsSection onFormOpenChange={setIsAddingMaterial} />
+        )}
+
         {activeTab === "settings" && <div>Settings Content</div>}
       </main>
 

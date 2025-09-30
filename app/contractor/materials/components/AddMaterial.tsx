@@ -149,7 +149,7 @@ export default function AddMaterial({ onCancel, onSaved }: AddFormProps) {
       </div>
 
       {/* form */}
-      <div className="px-4 pb-6 pt-4 space-y-4">
+      <div className="px-4 pb-2 pt-4 space-y-4">
         {/* Category */}
         <div>
           <label className="block text-xs text-black-600 mb-1">Category</label>
@@ -221,7 +221,7 @@ export default function AddMaterial({ onCancel, onSaved }: AddFormProps) {
             </button>
 
             {qtyOpen && (
-              <div className="absolute z-10 mt-2 w-full rounded-xl border border-gray-200 bg-white shadow-lg overflow-hidden">
+              <div className="absolute z-10 mt-2 w-full rounded-xl border border-gray-200 shadow-lg overflow-hidden">
                 <div className="px-4 py-2 text-xs font-semibold text-gray-700">Quantity</div>
                 {[20, 40, 50, 80, 100].map((q) => (
                   <button
@@ -252,7 +252,7 @@ export default function AddMaterial({ onCancel, onSaved }: AddFormProps) {
         </div>
 
         {/* Actions */}
-        <div className="pt-8 ">
+        <div className="pt-8">
           <button
             disabled={!canSave}
             onClick={handleSave}
@@ -260,11 +260,11 @@ export default function AddMaterial({ onCancel, onSaved }: AddFormProps) {
               canSave ? "bg-blue-600 hover:bg-blue-500" : "bg-blue-300 cursor-not-allowed"
             }`}
           >
-            Saved
+            Save
           </button>
           <button
             onClick={onCancel}
-            className="mt-5 w-full h-10 rounded-full border border-gray-200 text-gray-700 text-sm"
+            className="w-full mt-3 mb-80 h-11 rounded-full border border-gray-200 text-gray-700 text-sm"
           >
             Cancel
           </button>

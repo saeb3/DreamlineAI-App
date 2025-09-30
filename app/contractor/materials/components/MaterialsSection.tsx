@@ -92,9 +92,13 @@ const RECENTS_COUNT = 3;
 const formatDMY = (iso?: string) =>
   iso ? new Date(iso).toLocaleDateString("en-GB") : "";
 
+// Notify parent (dashboard) when the Add form opens/closes
+type Props = { onFormOpenChange?: (open: boolean) => void };
+
 // ---- Main component -------------------------------------------------------
-export default function MaterialsSection() {
+export default function MaterialsSection({ onFormOpenChange }: Props) {
   type Mode = "list" | "form";
+
   const [mode, setMode] = useState<Mode>("list");
 
   const [items, setItems] = useState<MaterialCard[]>(INITIAL_MATERIALS);
@@ -133,7 +137,10 @@ export default function MaterialsSection() {
   if (mode === "form") {
     return (
       <AddMaterial
-        onCancel={() => setMode("list")}
+        onCancel={() => {
+          setMode("list");
+          onFormOpenChange?.(false);
+        }}
         onSaved={(newCard) => {
           setItems((prev) => [newCard, ...prev]);
           // success overlay handled inside AddMaterial, then it calls onCancel()
@@ -151,7 +158,10 @@ export default function MaterialsSection() {
             <h2 className="text-lg font-bold text-black">Categories</h2>
             <button
               className="w-[180px] h-10 rounded-full bg-blue-600 text-white text-lg font-bold hover:bg-sky-500 flex items-center justify-center"
-              onClick={() => setMode("form")}
+              onClick={() => {
+                setMode("form");
+                onFormOpenChange?.(true);
+        }}
             >
               Add material
             </button>
