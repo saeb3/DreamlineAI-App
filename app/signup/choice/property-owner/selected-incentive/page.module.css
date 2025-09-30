@@ -1,0 +1,127 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: system-ui, sans-serif;
+  color: #111;
+}
+.hero {
+  position: relative;
+  height: 200px;
+
+  /* inset 16px on top, right, bottom, and left */
+  margin: 16px;
+
+  background: #e0e0e0;
+
+  /* round *all* corners */
+  border-radius: 20px;
+
+  overflow: hidden;
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+}
+.icon {
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+.iconGroup {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+}
+.content {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+/*h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}*/
+.description {
+  margin: 8px 0 16px;
+  /*font-size: 0.95rem;
+  line-height: 1.4;
+  color: #444;*/
+}
+.accordion {
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+}
+.section {
+  border-bottom: 1px solid #f0f0f0;
+}
+.sectionHeader {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.sectionBody {
+  padding: 8px 0px;
+}
+.questions {
+  margin: 8px 16px;
+  font-size: 0.9rem;
+  color: #333;
+}
+.questions a {
+  color: #0366d6;
+  text-decoration: none;
+}
+.actions {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #fff;
+}
+
+.btn {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 9999px;       /* full pill shape */
+  border: 1px solid transparent;
+  text-align: center;
+  cursor: pointer;
+}
+
+.primary {
+  background: #067df7;
+  color: #fff;
+  border-color: transparent;
+}
+
+.outline {
+  background: #fff;
+  color: #111;
+  border-color: #067df7;       /* 1px blue border */
+}
+
+.sectionHeader span {
+  font-size: 0.95rem;  /* slightly below the default 1rem */
+  font-weight: 600;    /* semibold/bold */
+}
