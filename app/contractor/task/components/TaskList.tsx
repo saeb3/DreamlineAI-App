@@ -23,9 +23,12 @@ const statusText = (s: Task["status"]) =>
    : s === "Pending"     ? "text-[#0057A0]"
    :                       "text-[#D53E2A]";
 
-export interface TaskListProps { tasks: Task[]; title?: string }
-
-export function TaskList({ tasks, title = "All Tasks" }: TaskListProps) {
+export interface TaskListProps {
+  tasks: Task[];
+  title?: string;
+  onEdit?: (task: Task) => void;
+}
+export function TaskList({ tasks, title = "All Tasks", onEdit }: TaskListProps) {
   // group by status
   const grouped: Record<Task["status"], Task[]> = {
     Completed: [],
@@ -130,6 +133,14 @@ export function TaskList({ tasks, title = "All Tasks" }: TaskListProps) {
                       <span className="font-poppins text-[10px] leading-[15px]">Files</span>
                     </div>
                   )}
+
+                  <button
+                    type="button"
+                    onClick={() => onEdit?.(task)}
+                    className="ml-auto inline-flex items-center rounded-full border border-blue-500 px-3 py-[2px] text-[12px] font-medium text-blue-600 hover:bg-blue-50"
+                  >
+                    Edit
+                  </button>
                 </div>
               </div>
             ))}

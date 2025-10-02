@@ -28,6 +28,7 @@ export interface TaskSectionProps {
   filter: FilterType | null;   // null indicates no filter (show all tasks)
   onCreate: () => void;
   onFilterChange: (filter: FilterType | null) => void;
+  onEdit?: (task: Task) => void;
 }
 
 /**
@@ -39,6 +40,7 @@ export default function TaskSection({
   filter,
   onCreate,
   onFilterChange,
+  onEdit,
 }: TaskSectionProps) {
   // Filter tasks based on selected status
   const filteredTasks = filter ? tasks.filter((task) => task.status === filter) : tasks;
@@ -54,7 +56,7 @@ export default function TaskSection({
         <TaskHeader total={tasks.length} onCreate={onCreate} />
 
         {/* Status Filters */}
-        <div className="grid grid-cols-4 gap-3">
+        <div className="flex flex-row justify-between gap-3">
           {STATUS_LIST.map((status) => {
             const count = tasks.filter((t) => t.status === status).length;
             const isActive = filter === status;
@@ -78,7 +80,7 @@ export default function TaskSection({
       {noneAtAll ? (
         <NoTasksPlaceholder />
       ) : (
-        <TaskList tasks={filteredTasks} title={listTitle} />
+        <TaskList tasks={filteredTasks} title={listTitle} onEdit={onEdit} />
       )}
     </section>
   );

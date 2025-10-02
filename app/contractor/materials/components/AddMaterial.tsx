@@ -264,7 +264,7 @@ export default function AddMaterial({ onCancel, onSaved }: AddFormProps) {
           </button>
           <button
             onClick={onCancel}
-            className="w-full mt-3 mb-80 h-11 rounded-full border border-gray-200 text-gray-700 text-sm"
+            className="w-full mt-3 h-11 rounded-full border border-gray-200 text-gray-700 text-sm"
           >
             Cancel
           </button>

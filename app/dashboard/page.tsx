@@ -9,7 +9,8 @@ import TaskSection, {
 } from "../contractor/task/components/TaskSection";
 import ProjectSection from "../contractor/task/components/ProjectSection";
 import { CreateTask } from "../contractor/task/components/CreateTask"; // inline creator
-import { User, HelpCircle, Home, Bell, Search } from "lucide-react";
+import FilesEditor from "../contractor/task/components/FilesEditor";
+import { User, HelpCircle, Home, Bell, Search, ArrowLeft } from "lucide-react";
 import MaterialsSection from "../contractor/materials/components/MaterialsSection";
 
 export default function DreamlineDashboard() {
@@ -32,6 +33,12 @@ export default function DreamlineDashboard() {
   const startCreate = () => setIsCreating(true);
   const cancelCreate = () => setIsCreating(false);
 
+  // Edit flow
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const startEdit = (task: Task) => { setEditingTask(task); setIsEditing(true); };
+  const stopEdit = () => { setIsEditing(false); setEditingTask(null); };
+
   // Materials: whether "Add Material" form is open
   const [isAddingMaterial, setIsAddingMaterial] = useState(false);
 
@@ -46,6 +53,9 @@ export default function DreamlineDashboard() {
     setIsCreating(false);      // go back to Task list
   };
 
+  const showTabs = 
+    !(activeTab === "task" && (isEditing));
+
   // Hide footer only when creating inside Task tab
   const showFooter =
     !(activeTab === "task" && isCreating) &&
@@ -59,32 +69,54 @@ export default function DreamlineDashboard() {
         <button className="text-3xl">☰</button>
       </header>
 
-      {/* Tabs Section */}
-      <ScrollNav
-        activeTab={activeTab ?? ""} // ⬅️ falsy => welcome image shows
-        items={[
-          { key: "task", label: "Task", active: activeTab === "task", onClick: () => { setActiveTab("task"); setIsCreating(false); } },
-          { key: "projects", label: "Projects", active: activeTab === "projects", onClick: () => { setActiveTab("projects"); setIsCreating(false); } },
-          { key: "materials", label: "Materials", active: activeTab === "materials", onClick: () => { setActiveTab("materials"); setIsCreating(false); } },
-          { key: "settings", label: "Settings", active: activeTab === "settings", onClick: () => { setActiveTab("settings"); setIsCreating(false); } },
-        ]}
-      />
+      {/* Tabs Section (or Files title bar when editing) */}
+       {showTabs ? (
+         <ScrollNav
+           activeTab={activeTab ?? ""}
+           items={[
+             { key: "task", label: "Task", active: activeTab === "task", onClick: () => { setActiveTab("task"); setIsCreating(false); setIsEditing(false); } },
+             { key: "projects", label: "Projects", active: activeTab === "projects", onClick: () => { setActiveTab("projects"); setIsCreating(false); setIsEditing(false); } },
+             { key: "materials", label: "Materials", active: activeTab === "materials", onClick: () => { setActiveTab("materials"); setIsCreating(false); setIsEditing(false); } },
+             { key: "settings", label: "Settings", active: activeTab === "settings", onClick: () => { setActiveTab("settings"); setIsCreating(false); setIsEditing(false); } },
+           ]}
+         />
+       ) : (
+         // Compact bar in place of tabs during edit (constrained to max-w-md) 
+         <div className="w-full bg-white border-gray-2 shadow-sm">
+          <div className="max-w-md mx-auto h-11 px-3 flex items-center justify-between">
+            <button
+              onClick={stopEdit}
+              className="p-1 -ml-1 rounded hover:bg-gray-100"
+              aria-label="Back"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+            <h1 className="text-sm font-semibold">Your Files</h1>
+            <div className="w-5" /> {/* spacer */}
+          </div>
+        </div>
+        )}
 
       {/* Tab Content Section */}
       <main
-        className={`flex flex-1 flex-col max-w-md min-h-screen ${
-          showFooter ? "pb-20" : ""
+        className={`flex flex-1 flex-col ${
+          showFooter
+            ? "min-h-[calc(100vh-var(--footer-h))] pb-[calc(env(safe-area-inset-bottom)+var(--footer-h))]"
+            : "min-h-screen"
         }`}
-      >
+     >
         {activeTab === "task" && (
-          isCreating ? (
+          isEditing && editingTask ? (
+            <FilesEditor task={editingTask} onBack={stopEdit} showHeader={false} />
+          ) : isCreating ? (
             <CreateTask onCancel={cancelCreate} onSubmit={addTask} />
           ) : (
             <TaskSection
               tasks={tasks}
               filter={filter}
-              onCreate={startCreate}      // click shows ONLY the create UI
+              onCreate={startCreate}
               onFilterChange={setFilter}
+              onEdit={startEdit}          // 👈 wire the Edit handler
             />
           )
         )}
