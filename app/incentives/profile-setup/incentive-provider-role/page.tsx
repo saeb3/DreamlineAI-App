@@ -39,7 +39,12 @@ const IncetiveProviderRole = () => {
   return (
     <div className="flex max-w-md min-h-screen bg-gray-50 flex-col text-black">
       <header className="flex items-center justify-between px-4 py-4 shadow-sm bg-white">
-        <Image src="/images/logo.png" alt="Logo" width={80} height={50} />
+        <Image 
+        src="/images/logo.png"
+        alt="Dreamline Logo"
+        width={80}
+        height={50}
+        />
         <button className="text-3xl">☰</button>
       </header>
 

@@ -9,20 +9,20 @@ const SignupEmailConfirmation = () => {
   
   const router = useRouter();
 
+  const handleNext = (e: any) => { 
+    router.push("/incentives/signup/email-code");
+  };
+
   return (
     <div className="flex max-w-md min-h-screen flex-col">
       <header className="flex items-center justify-between px-4 py-4 shadow-sm bg-white">
         <Image 
-          src="/images/logo.png"
-          alt="Dreamline Logo"
-          width={80}
-          height={50}
+        src="/images/logo.png"
+        alt="Dreamline Logo"
+        width={80}
+        height={50}
         />
-        <button className="block text-gray-600 md:hidden" aria-label="Menu">
-          <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-            <path d="M4 5h16M4 12h16M4 19h16" />
-          </svg>
-        </button>
+        <button className="text-3xl">☰</button>
       </header>
 
       <main className="flex flex-1 flex-col bg-gray-50 text-black">
@@ -59,6 +59,7 @@ const SignupEmailConfirmation = () => {
               <div className="mt-15 pt-6 px-4 pb-4">
                 <button
                   type="button"
+                  onClick={handleNext}
                   className="mb-4 w-full rounded-full bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   Next

@@ -21,20 +21,20 @@ const IncentivesProviderSignup = () => {
       email,
       password,
     });
-    setPageState("loading");
-    
-    // Show loading state for 2 seconds then success state
-    setTimeout(() => {
-      setPageState("success");
-    }, 2000);
+    router.push("/incentives/signup/registration-form");
   };
 
   
 
   return (
     <div className="flex max-w-md min-h-screen bg-gray-100 flex-col text-black">
-      <header className="flex items-center justify-between px-4 py-4 bg-white">
-        <Image src="/images/logo.png" alt="Logo" width={80} height={50} />
+      <header className="flex items-center justify-between px-4 py-4 shadow-sm bg-white">
+        <Image 
+        src="/images/logo.png"
+        alt="Dreamline Logo"
+        width={80}
+        height={50}
+        />
         <button className="text-3xl">☰</button>
       </header>
 

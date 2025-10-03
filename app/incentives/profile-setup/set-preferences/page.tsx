@@ -58,16 +58,12 @@ export default function ProfileSetupSetPreferences() {
     <div className="flex max-w-md min-h-screen flex-col">
       <header className="flex items-center justify-between px-4 py-4 shadow-sm bg-white">
         <Image 
-          src="/images/logo.png"
-          alt="Dreamline Logo"
-          width={80}
-          height={50}
+        src="/images/logo.png"
+        alt="Dreamline Logo"
+        width={80}
+        height={50}
         />
-        <button className="block text-gray-600 md:hidden" aria-label="Menu">
-          <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-            <path d="M4 5h16M4 12h16M4 19h16" />
-          </svg>
-        </button>
+        <button className="text-3xl">☰</button>
       </header>
 
       <main className="flex flex-1 flex-col text-black">

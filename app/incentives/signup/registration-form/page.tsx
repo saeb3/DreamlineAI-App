@@ -31,28 +31,20 @@ const RegistrationForm = () => {
       password,
       address,
     });
-    setPageState("loading");
     
-    // Show loading state for 2 seconds then success state
-    setTimeout(() => {
-      setPageState("success");
-    }, 2000);
+    router.push("/incentives/signup/email-verification");
   };
 
   return (
     <div className="flex max-w-md min-h-screen flex-col">
       <header className="flex items-center justify-between px-4 py-4 shadow-sm bg-white">
         <Image 
-          src="/images/logo.png"
-          alt="Dreamline Logo"
-          width={80}
-          height={50}
+        src="/images/logo.png"
+        alt="Dreamline Logo"
+        width={80}
+        height={50}
         />
-        <button className="block text-gray-600 md:hidden" aria-label="Menu">
-          <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-            <path d="M4 5h16M4 12h16M4 19h16" />
-          </svg>
-        </button>
+        <button className="text-3xl">☰</button>
       </header>
 
       <main className="flex flex-1 flex-col text-black">
@@ -200,50 +192,6 @@ const RegistrationForm = () => {
             </form>
             </div>
             
-          </div>
-        )}
-
-        {pageState === "loading" && (
-          <div className="flex flex-1 flex-col items-center justify-center p-4">
-            <div className="w-full max-w-md rounded-lg bg-white shadow-md p-8 text-center">
-              <div className="flex justify-center mb-6">
-                <div className="h-16 w-16 relative">
-                  <div className="absolute inset-0 rounded-full border-4 border-gray-200"></div>
-                  <div className="absolute inset-0 rounded-full border-4 border-t-blue-500 animate-spin"></div>
-                </div>
-              </div>
-              <h2 className="text-xl font-bold mb-2">
-                Almost There! Finalizing Your Profile
-              </h2>
-              <p className="text-gray-600">
-                Setting up your profile, almost done!
-              </p>
-            </div>
-          </div>
-        )}
-
-        {pageState === "success" && (
-          <div className="flex flex-1 flex-col items-center justify-center p-4">
-            <div className="w-full max-w-md rounded-lg bg-white shadow-md p-8 text-center">
-              <h2 className="text-xl font-bold mb-6">
-                Your profile is set!
-              </h2>
-              
-              <div className="flex justify-center space-x-4">
-                {/* <Link
-                  href="/contractor/profile-view"
-                  className="px-6 py-2 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                >
-                  View
-                </Link> */}
-                <Link
-                  href="/incentives/profile-setup/incentive-provider-role"
-                  className="px-6 py-2 bg-blue-600 text-white font-medium rounded-full border border-blue-600 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                >
-                  Next
-                </Link>
-              </div>
-            </div>
           </div>
         )}
       </main>
